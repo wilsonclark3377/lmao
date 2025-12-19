@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FLUID REALITY ZONE</title>
+<style>
+/* NUCLEAR MODE: 0px margins • vertical mobile • intentionally ugly Myspace */
+:root{ --neon:#00ff66; --cyan:#00ccff; --mag:#ff00ff; --y:#ffff00; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:#000; color:var(--neon); font-family:"Comic Sans MS", Arial, sans-serif; }/* Glitter GIF-ish tiled background (inline data URI) */ body{ background-image: url("data:image/gif;base64,R0lGODlhEAAQAPQAAP///wAAAP8AAP//AP8A/wD//wAA//8A/wD/AP8A/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAVoICCOZGmeaKqubOu+cCzPdFzTQGQFhGQ0TQW7yqYQWq9a2b0hY0oOQ1QWJYQkYp0iYQmBz0Yh3oYBqH9h1S0B0OQ0o0g0G0C2Y4g8QFADs="), linear-gradient(180deg, rgba(255,0,255,.14), rgba(0,204,255,.08)); background-repeat: repeat; background-size: 28px 28px, auto; }
+
+/* 0px margins everywhere; tiny internal padding only */ .marquee{ background: var(--mag); color:#000; font-weight:900; border-bottom:2px ridge var(--neon); margin:0; }
+
+.container{ width:100%; padding:2px; }
+
+.header{ border:2px outset var(--mag); background: rgba(0,0,0,.86); padding:6px; } .header h1{ font-size:20px; margin:0; color:var(--y); text-shadow:1px 1px var(--cyan), -1px -1px var(--neon); line-height:1.1; }
+
+.small{ font-size:11px; color:#ddd; font-family: "Courier New", monospace; }
+
+.blink{ animation: blink .75s steps(1,end) infinite; } @keyframes blink{ 50%{ opacity:0; } }
+
+.section{ border:2px dotted var(--neon); background: rgba(0,0,0,.80); margin-top:4px; padding:6px; } .section h2{ margin:0 0 6px 0; font-size:14px; background: var(--cyan); color:#000; padding:2px 4px; border:2px groove var(--mag); letter-spacing:.5px; }
+
+ul{ margin:0 0 0 16px; padding:0; } li{ margin:4px 0; }
+
+.badges{ line-height: 1.6; } .badge{ display:inline-block; font-size:10px; padding:2px 5px; border:1px solid var(--mag); margin:2px 2px 0 0; background:#111; color: var(--cyan); }
+
+.box{ background:#000; border:2px inset var(--mag); padding:6px; font-family:"Courier New", monospace; font-size:11px; overflow:auto; }
+
+.quote{ margin-top:6px; border-left:4px solid var(--y); padding:6px; font-style:italic; font-size:12px; background: rgba(255,255,0,.06); }
+
+.counter{ display:flex; gap:8px; align-items:center; font-size:11px; color:#ccc; } .counter b{ color: var(--y); }
+
+/* Top 8 parody cards */ .top8{ display:grid; grid-template-columns: repeat(4, 1fr); gap:4px; } .friend{ border:2px ridge var(--cyan); background: rgba(10,10,10,.9); padding:4px; text-align:center; font-size:10px; } .avatar{ width:100%; aspect-ratio: 1 / 1; border:2px solid var(--mag); background: radial-gradient(circle at 30% 30%, rgba(255,0,255,.45), transparent 55%), radial-gradient(circle at 70% 70%, rgba(0,204,255,.35), transparent 55%), linear-gradient(135deg, rgba(0,255,102,.25), rgba(0,0,0,.9)); }
+
+/* Inline SVG styling */ svg{ width:100%; height:auto; display:block; background:#000; border:2px double var(--y); } .svgtxt{ font-family: Arial, sans-serif; font-size:12px; fill: var(--neon); } .svgbox{ margin-top:6px; }
+
+/* Fake MIDI player bar */ .player{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; } .btn{ display:inline-block; padding:4px 8px; background: var(--cyan); color:#000; border:2px outset var(--mag); font-weight:900; text-decoration:none; font-size:11px; } .btn:active{ border-style: inset; }
+
+.footer{ margin-top:6px; border-top:2px ridge var(--cyan); padding:6px 2px; font-size:10px; color:#aaa; background: rgba(0,0,0,.75); } </style>
+
+</head>
+<body><!-- Auto-playing “fake MIDI”: browsers may block autoplay; this is intentionally silly --><audio id="midi" autoplay loop>
+  <!-- Tiny silent WAV (placeholder). The UI pretends it's MIDI. -->
+  <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=" type="audio/wav">
+</audio><marquee class="marquee" scrollamount="6">NO NAMES • NO LOCATIONS • JUST PATTERNS • 2006 BRAIN • GLITTER MODE ON</marquee>
+
+<div class="container">  <div class="header">
+    <h1>FLUID REALITY ZONE <span class="blink">ONLINE</span></h1>
+    <div class="small">concept collage • identifiers removed • mobile vertical • 0px margins</div>
+    <div class="counter" style="margin-top:6px;">
+      <span>Visitors:</span> <b id="visits">000000</b>
+      <span>•</span>
+      <span>Now Playing:</span> <b>angry_glitter_ether.mid</b>
+    </div>
+    <div class="player" style="margin-top:6px;">
+      <a class="btn" href="javascript:void(0)" id="play">▶ PLAY</a>
+      <a class="btn" href="javascript:void(0)" id="pause">⏸ PAUSE</a>
+      <span class="small">(If nothing plays: autoplay got blocked. That’s part of the vibe.)</span>
+    </div>
+  </div>  <div class="section">
+    <h2>Top 8 (Parody Friends)</h2>
+    <div class="small">anonymous archetypes • no real people • no identifiers</div>
+    <div class="top8" style="margin-top:6px;">
+      <div class="friend"><div class="avatar"></div><div>Boundary Bot</div></div>
+      <div class="friend"><div class="avatar"></div><div>Noise Goblin</div></div>
+      <div class="friend"><div class="avatar"></div><div>Reciprocity Fairy</div></div>
+      <div class="friend"><div class="avatar"></div><div>Entropy DJ</div></div>
+      <div class="friend"><div class="avatar"></div><div>Clarity Frog</div></div>
+      <div class="friend"><div class="avatar"></div><div>Context Wizard</div></div>
+      <div class="friend"><div class="avatar"></div><div>Exit Phrase Cat</div></div>
+      <div class="friend"><div class="avatar"></div><div>Systems Gremlin</div></div>
+    </div>
+  </div>  <div class="section">
+    <h2>Axioms</h2>
+    <ul class="small">
+      <li>Attention is a resource; forced attention is a tax.</li>
+      <li>Manipulation prefers fragmentation over resolution.</li>
+      <li>Talking <i>about</i> someone is not talking <i>to</i> them.</li>
+      <li>Noise scales faster than truth unless accountability exists.</li>
+      <li>Boundaries reduce interpretability and shrink chaos.</li>
+    </ul>
+  </div>  <div class="section">
+    <h2>Glossary</h2>
+    <ul class="small">
+      <li><b>Attention-tax:</b> coerced focus drain.</li>
+      <li><b>Orbital behavior:</b> observing without reciprocity.</li>
+      <li><b>Fractional conflict:</b> splitting the core issue into decoys.</li>
+      <li><b>Entropy inflation:</b> adding noise so clarity can’t form.</li>
+      <li><b>Boundary protocol:</b> repeatable rules that reduce exposure.</li>
+    </ul>
+  </div>  <div class="section">
+    <h2>H₂O Phase Model (Inline SVG)</h2>
+    <div class="small">metaphor only • describes dynamics, not identity</div>
+    <div class="svgbox">
+      <svg viewBox="0 0 360 280" role="img" aria-label="H2O phase metaphor diagram">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff00ff" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#00ccff" stop-opacity="0.25"/>
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="344" height="264" rx="10" fill="url(#g)" stroke="#ffff00" stroke-width="2"/><text x="20" y="36" class="svgtxt" fill="#ffff00" style="font-weight:900;">H₂O PHASES → SOCIAL DYNAMICS</text>
+
+    <rect x="20" y="52" width="320" height="48" rx="8" fill="#000" stroke="#ff00ff" stroke-width="2"/>
+    <text x="30" y="76" class="svgtxt" style="font-weight:900;">SOLID</text>
+    <text x="110" y="76" class="svgtz" fill="#00ff66" font-family="Arial" font-size="12">rigid • stable • brittle</text>
+    <text x="30" y="94" class="svgtxt">risk: cracks / control</text>
+
+    <rect x="20" y="108" width="320" height="48" rx="8" fill="#000" stroke="#00ccff" stroke-width="2"/>
+    <text x="30" y="132" class="svgtxt" style="font-weight:900;">LIQUID</text>
+    <text x="110" y="132" fill="#00ff66" font-family="Arial" font-size="12">adaptive • relational • absorbs</text>
+    <text x="30" y="150" class="svgtxt">risk: loses shape</text>
+
+    <rect x="20" y="164" width="320" height="48" rx="8" fill="#000" stroke="#00ff66" stroke-width="2"/>
+    <text x="30" y="188" class="svgtxt" style="font-weight:900;">GAS</text>
+    <text x="110" y="188" fill="#00ff66" font-family="Arial" font-size="12">diffuse • abstract • detached</text>
+    <text x="30" y="206" class="svgtxt">risk: ungrounded</text>
+
+    <rect x="20" y="220" width="320" height="44" rx="8" fill="#000" stroke="#ffff00" stroke-width="2"/>
+    <text x="30" y="246" class="svgtxt" style="font-weight:900;">PLASMA</text>
+    <text x="110" y="246" fill="#00ff66" font-family="Arial" font-size="12">high energy • unstable fields</text>
+    <text x="30" y="262" class="svgtxt">risk: chaotic / unsustainable</text>
+  </svg>
+</div>
+
+  </div>  <div class="section">
+    <h2>Fear→Monitoring Loop (Inline SVG)</h2>
+    <div class="small">a pattern diagram + an off-ramp</div>
+    <div class="svgbox">
+      <svg viewBox="0 0 360 320" role="img" aria-label="feedback loop diagram">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#00ff66" />
+          </marker>
+        </defs>
+        <rect x="8" y="8" width="344" height="304" rx="10" fill="#000" stroke="#ffff00" stroke-width="2"/>
+        <text x="18" y="34" class="svgtxt" fill="#ffff00" style="font-weight:900;">TERROR-FEEDBACK LOOP</text><g stroke="#00ff66" stroke-width="2" fill="#050505">
+      <rect x="50" y="52" width="260" height="44" rx="10"/>
+      <rect x="50" y="112" width="260" height="44" rx="10"/>
+      <rect x="50" y="172" width="260" height="44" rx="10"/>
+      <rect x="50" y="232" width="260" height="44" rx="10"/>
+    </g>
+
+    <text x="70" y="80" class="svgtxt" style="font-weight:900;">FEAR / NOISE</text>
+    <text x="70" y="140" class="svgtxt" style="font-weight:900;">EXTRA WATCHING</text>
+    <text x="70" y="200" class="svgtxt" style="font-weight:900;">MISREAD SIGNALS</text>
+    <text x="70" y="260" class="svgtxt" style="font-weight:900;">ESCALATION</text>
+
+    <path d="M180,96 L180,112" stroke="#00ff66" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M180,156 L180,172" stroke="#00ff66" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M180,216 L180,232" stroke="#00ff66" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- loop-back -->
+    <path d="M310,254 C340,254 340,70 310,70" stroke="#00ff66" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- off-ramp -->
+    <path d="M50,140 C20,140 20,290 90,290" stroke="#ffff00" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <rect x="90" y="276" width="220" height="30" rx="8" fill="#111" stroke="#ffff00" stroke-width="2"/>
+    <text x="102" y="296" font-family="Arial" font-size="12" fill="#ffff00">OFF-RAMP: boundaries + reciprocity</text>
+  </svg>
+</div>
+
+  </div>  <div class="section">
+    <h2>Boundary Protocols</h2>
+    <ul class="small">
+      <li><b>Public/private split:</b> vulnerable behaviors stay private.</li>
+      <li><b>One-sentence exits:</b> “Not discussing that.”</li>
+      <li><b>Reduce interpretability:</b> fewer explanations.</li>
+      <li><b>Choose clean contexts:</b> predictable norms + accountability.</li>
+      <li><b>Document reality:</b> brief notes for yourself.</li>
+    </ul>
+  </div>  <div class="quote">“If a system profits from misunderstanding you, it will optimize for it.”</div>  <div class="footer">
+    no personal data • no local identifiers • no targeting • pattern analysis only
+  </div></div><script>
+// Visitor counter (local-only Myspace vibe)
+(function(){
+  const key = 'frz_visits_v1';
+  const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
+  localStorage.setItem(key, String(n));
+  const pad = String(n).padStart(6,'0');
+  const el = document.getElementById('visits');
+  if(el) el.textContent = pad;
+})();
+
+// Fake MIDI controls
+const audio = document.getElementById('midi');
+const playBtn = document.getElementById('play');
+const pauseBtn = document.getElementById('pause');
+if(playBtn) playBtn.addEventListener('click', () => audio && audio.play && audio.play());
+if(pauseBtn) pauseBtn.addEventListener('click', () => audio && audio.pause && audio.pause());
+</script></body>
+</html>
